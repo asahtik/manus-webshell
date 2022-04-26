@@ -1,0 +1,336 @@
+
+.header {
+    margin: 20px 0 50px 0;
+}
+
+.header .emergency {
+    float: right;
+}
+
+.joint {
+    clear: both;
+    display: block;
+    font-size: 120%;
+    margin: 5px;
+    vertical-align: top;
+}
+
+.joint span,
+.joint div,
+.joint button {
+    vertical-align: top;
+}
+
+#container {
+    margin-top: 30px;
+}
+
+#logo img {
+    width: 3em;
+    margin-top: -12px;
+    cursor: pointer;
+}
+
+.joint .information {
+    display: inline-block;
+    width: 40%;
+}
+
+.joint .information .title {
+    display: inline-block;
+    width: 100%;
+}
+
+.joint .information .type {
+    display: inline-block;
+    width: 100%;
+    color: gray;
+    font-size: 80%
+}
+
+.joint .status {
+    display: inline-block;
+    position: relative;
+    width: 59%;
+    height: 20px;
+    border: 1px gray solid;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgb(200, 200, 200);
+    box-shadow: 1px 1px 4px #888888 inset;
+}
+
+.joint .status .current,
+.joint .status .goal {
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    width: 8px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.joint .status .current {
+    background-color: rgb(50, 93, 136);
+    border: 1px rgb(80, 80, 140) solid;
+    z-index: 10;
+}
+
+.joint .status .goal {
+    background-color: rgba(154, 154, 154, 0.5);
+    z-index: 1;
+}
+
+.joint button {
+    margin: 0px 3px;
+}
+
+.viewer {
+	width: 100%;
+	position: relative;
+}
+
+.viewer .tools {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	display: none;
+}
+
+.viewer img {
+    position: absolute;
+    z-index: -100;
+    background-color: white;
+}
+
+.viewer:hover .tools {
+	display: block;
+	text-align: right;
+}
+
+.viewer canvas {
+    border: 1px gray solid;
+}
+
+#app-list {
+    font-size: 200%;
+}
+
+.list {
+    clear: both;
+}
+
+#programlist .list,
+#poseslist .list {
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+.list.list-group {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.list-group-item .list-tools {
+    display: none;
+    float: right;
+    margin-top: -7px;
+    margin-right: -7px;
+}
+
+.list-group-item:hover .list-tools,
+.list-group-item.editable .list-tools {
+    display: block;
+}
+
+.list-group-item .list-tools i {
+    font-size: 120%;
+    margin-left: 5px;
+}
+
+.list-group-item.pose-item .list-tools i {
+    font-size: 100%;
+    margin-left: 5px;
+}
+
+.list-group-item .list-tools i.glyphicon-trash {
+    color: red;
+}
+
+.list-tools .tool {
+    display: inline-block;
+    padding: 5px;
+    margin: 3px;
+    border: 1px solid #464545;
+    border-radius: 4px;
+}
+
+.list-group-item.pose-item {
+    cursor: pointer;
+}
+
+.list-group-item.pose-item {
+    cursor: pointer;
+}
+
+.list-group-item.program-item .metadata {
+    font-size: 90%;
+    color: gray;
+}
+
+.list-group-item.program-item .metadata span {
+    margin-right: 10px;
+}
+
+
+.list-group-item.apps-item .name {
+    font-size: 120%;
+}
+
+.list-group-item.apps-item .version {
+    font-size: 90%;
+    color: gray;
+}
+
+.list-group-item.apps-item .description {
+    font-size: 90%;
+    display: none;
+}
+
+.list-group-item.apps-item.expanded .description {
+    display: block;
+}
+
+.toolbar {
+    margin-bottom: 20px;
+}
+
+.toolbar .btn {
+    margin: 0 3px;
+}
+
+.toolbar.right {
+    float: right;
+    text-align: right;
+    display: block;
+}
+
+#blockly-area {
+    width:100%;
+    height:600px;
+}
+
+#blockly-workspace {
+    position: absolute;
+}
+
+#blockly-workspace .blocklyToolboxDiv {
+    background-color: #aaa;
+}
+
+#blockly-workspace .blocklyTreeRow:hover:not(.blocklyTreeSelected) {
+    background-color: #444;
+}
+
+#blockly-workspace .blocklyToolboxDiv .blocklyTreeLabel {
+    color: #222;
+}
+
+#blockly-workspace .blocklyToolboxDiv .blocklyTreeRow:hover {
+    background-color: #555;
+}
+
+#blockly-workspace .blocklyToolboxDiv .blocklyTreeRow:hover .blocklyTreeLabel {
+    color: white;
+}
+
+#console {
+    position: relative;
+}
+
+#console .content {
+    margin-top: 10px;
+    padding: 10px;
+    font-family: monospace;
+    height: 550px;
+    overflow: auto;
+    background: black;
+    color: #64FF00;
+    border-radius: 4px 4px 0px 0px;
+}
+
+#console .content span {
+    display: block;
+}
+
+#console .content span.input {
+    color: #FF0010;
+}
+
+#console .content span.output {
+    color: #64FF00;
+}
+
+#console .inputline {
+    width: 100%;
+    margin: 0;
+    background-color: gray;
+    font-family: monospace;
+    color: black;
+    font-weight: bold;
+    border-radius: 0 0 10px 10px;
+    border: 5px black;
+    padding: 10px;
+}
+
+#console .inputline:hover {
+    background-color: #aaaaaa;
+}
+
+#console.terminated .content {
+    color: gray;
+}
+
+#console.terminated .content span.input {
+    color: #804044;
+}
+
+#console.terminated .content span.output {
+    color: #578040;
+}
+
+#console .message {
+    display: none;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    width: 100%;
+    background-color: gray;
+    padding: 10px;
+    user-select: none;
+}
+
+#console.terminated .message {
+    display: inline-block;
+}
+
+#python-editor {
+    position: relative;
+    height: 600px;
+    font-size: 16px;
+    border: 1px gray solid;
+}
+
+.program-item.readonly {
+    background-color: #eeeeee;
+}
+
+
+#actions a {
+    font-size: 2em;
+    color: white;
+}
+
+.modal-dialog {
+    z-index: 3000;
+}

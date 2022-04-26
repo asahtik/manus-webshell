@@ -1,0 +1,9 @@
+
+<ul class="list">
+  {{#each pose}}
+    <li><a class='list-group-item'><div class='name'>{{this.name}}</div></a></li>
+  {{else}}
+    <div class="alert alert-info">Add saved poses by clicking the button above.</div>
+  {{/each}}
+</ul>
+
