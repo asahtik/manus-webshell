@@ -4,7 +4,7 @@ from __future__ import absolute_import
 from asyncio import Future
 import uuid
 
-from manus.messages import JointType, PlanStateType
+from manus.messages import JointType, JointAxis, PlanStateType
 
 from .utilities import synchronize, JsonHandler, NumpyEncoder
 import tornado.web
@@ -133,8 +133,9 @@ class ManipulatorDescriptionHandler(JsonHandler):
     def encode_description(description):
         joints = []
         for j in description.joints:
-            joints.append({"type": JointType.str(j.type), "theta": j.dh_theta,
-                           "alpha": j.dh_alpha, "d": j.dh_d, "a": j.dh_a, "min": j.dh_min, "max": j.dh_max})
+            joints.append({"type": JointType.str(j.type), "axis": JointAxis.str(j.axis), 
+                    "tx": j.tx, "ty": j.ty, "tz": j.tz, "rr": j.rr, "rp": j.rp, "ry": j.ry, 
+                    "min": j.min, "max": j.max, "safe": j.safe})
         origin = {"x": description.frame.origin.x,
                   "y": description.frame.origin.y, "z": description.frame.origin.z}
         rotation = {"x": description.frame.rotation.x,
