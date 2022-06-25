@@ -120,9 +120,6 @@ let Interface = {
     },
 
     tab: function (name, icon, body) {
-
-        let id = id
-
         $('body').find("#tabs").append($('<div class="tab-pane active"></div>').data("tab-name", name).append(body));        
 
         $('body').find("#menu").append($(tab_menu_template({name, icon})));
