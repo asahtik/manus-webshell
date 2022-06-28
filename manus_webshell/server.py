@@ -269,6 +269,9 @@ class ConfigHandler(tornado.web.RequestHandler):
 class ApiWebSocket(tornado.websocket.WebSocketHandler):
     connections = []
 
+    def check_origin(self, origin):
+        return True
+
     def initialize(self, cameras=None, manipulators=None, apps=None, config=None):
         self.cameras = cameras
         self.manipulators = manipulators
