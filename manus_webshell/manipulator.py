@@ -202,6 +202,9 @@ class ManipulatorMoveJointHandler(ManipulatorBlockingHandler):
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
+    def options(self):
+        pass
+
     def check_origin():
         return True
 
