@@ -80,6 +80,7 @@ class CameraLocationHandler(JsonHandler):
         location = await self.camera.location()
 
         self.set_header('X-Timestamp', location.header.timestamp.isoformat())
+        self.set_header('Access-Control-Allow-Origin', '*')
         self.response = CameraLocationHandler.encode_location(location)
         self.write_json()
         self.finish()
