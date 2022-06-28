@@ -58,6 +58,8 @@ class ManipulatorBlockingHandler(JsonHandler):
         self.moveid = uuid.uuid4().hex
         self.future = Future()
 
+        self.set_header('Access-Control-Allow-Origin', '*')
+
     def check_origin(self, origin):
         return True
 
@@ -121,6 +123,8 @@ class ManipulatorDescriptionHandler(JsonHandler):
               self).__init__(application, request)
         self.manipulator = manipulator
 
+        self.set_header('Access-Control-Allow-Origin', '*')
+
     def check_origin(self, origin):
         return True
 
@@ -157,6 +161,8 @@ class ManipulatorStateHandler(JsonHandler):
     def __init__(self, application, request, manipulator):
         super(ManipulatorStateHandler, self).__init__(application, request)
         self.manipulator = manipulator
+
+        self.set_header('Access-Control-Allow-Origin', '*')
 
     def check_origin(self, origin):
         return True

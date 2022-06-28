@@ -43,6 +43,8 @@ class ApplicationHandler(JsonHandler):
     def __init__(self, application, request):
         super(ApplicationHandler, self).__init__(application, request)
 
+        self.set_header('Access-Control-Allow-Origin', '*')
+
     def check_origin(self, origin):
         return True
 
@@ -58,6 +60,8 @@ class CameraDescriptionHandler(JsonHandler):
     def __init__(self, application, request, camera):
         super(CameraDescriptionHandler, self).__init__(application, request)
         self.camera = camera
+
+        self.set_header('Access-Control-Allow-Origin', '*')
 
     def check_origin(self, origin):
         return True
@@ -81,6 +85,8 @@ class CameraLocationHandler(JsonHandler):
     def __init__(self, application, request, camera):
         super(CameraLocationHandler, self).__init__(application, request)
         self.camera = camera
+
+        self.set_header('Access-Control-Allow-Origin', '*')
 
     def check_origin(self, origin):
         return True
@@ -107,6 +113,8 @@ class AppsHandler(JsonHandler):
     def __init__(self, application, request, apps):
         super(AppsHandler, self).__init__(application, request)
         self._apps = apps
+
+        self.set_header('Access-Control-Allow-Origin', '*')
 
     def check_origin(self, origin):
         return True
@@ -156,6 +164,8 @@ class LoginHandler(JsonHandler):
         super(LoginHandler, self).__init__(application, request)
         self._users = users
 
+        self.set_header('Access-Control-Allow-Origin', '*')
+
     def check_origin(self, origin):
         return True
 
@@ -173,6 +183,8 @@ class PrivilegedHandler(JsonHandler):
     def __init__(self, application, request, privileged):
         super(PrivilegedHandler, self).__init__(application, request)
         self._privileged = privileged
+
+        self.set_header('Access-Control-Allow-Origin', '*')
 
     def check_origin(self, origin):
         return True
