@@ -30,7 +30,9 @@ class RedirectHandler(tornado.web.RequestHandler):
         super(RedirectHandler, self).__init__(application, request)
         self.url = url
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def get(self):
         self.redirect(self.url, True)

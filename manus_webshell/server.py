@@ -43,7 +43,9 @@ class ApplicationHandler(JsonHandler):
     def __init__(self, application, request):
         super(ApplicationHandler, self).__init__(application, request)
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def check_origin(self, origin):
         return True
@@ -61,7 +63,9 @@ class CameraDescriptionHandler(JsonHandler):
         super(CameraDescriptionHandler, self).__init__(application, request)
         self.camera = camera
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def check_origin(self, origin):
         return True
@@ -86,7 +90,9 @@ class CameraLocationHandler(JsonHandler):
         super(CameraLocationHandler, self).__init__(application, request)
         self.camera = camera
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def check_origin(self, origin):
         return True
@@ -114,7 +120,9 @@ class AppsHandler(JsonHandler):
         super(AppsHandler, self).__init__(application, request)
         self._apps = apps
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def check_origin(self, origin):
         return True
@@ -164,7 +172,9 @@ class LoginHandler(JsonHandler):
         super(LoginHandler, self).__init__(application, request)
         self._users = users
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def check_origin(self, origin):
         return True
@@ -184,7 +194,9 @@ class PrivilegedHandler(JsonHandler):
         super(PrivilegedHandler, self).__init__(application, request)
         self._privileged = privileged
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def check_origin(self, origin):
         return True
@@ -205,6 +217,10 @@ class StorageHandler(tornado.web.RequestHandler):
         super(StorageHandler, self).__init__(application, request)
         self._storage = storage
         StorageHandler.keys = set(storage.keys())
+
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def check_origin(self, origin):
         return True
@@ -264,6 +280,10 @@ class ConfigHandler(tornado.web.RequestHandler):
     def initialize(self, config):
         self._config = config
 
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+
     def check_origin(self, origin):
         return True
 
@@ -293,14 +313,18 @@ class ConfigHandler(tornado.web.RequestHandler):
 class ApiWebSocket(tornado.websocket.WebSocketHandler):
     connections = []
 
-    def check_origin(self, origin):
-        return True
-
     def initialize(self, cameras=None, manipulators=None, apps=None, config=None):
         self.cameras = cameras
         self.manipulators = manipulators
         #self.apps = apps
         self.config = config
+
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+
+    def check_origin(self, origin):
+        return True
 
     def open(self, *args, **kwargs):
         ApiWebSocket.connections.append(self)

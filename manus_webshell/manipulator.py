@@ -58,7 +58,9 @@ class ManipulatorBlockingHandler(JsonHandler):
         self.moveid = uuid.uuid4().hex
         self.future = Future()
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def check_origin(self, origin):
         return True
@@ -123,7 +125,9 @@ class ManipulatorDescriptionHandler(JsonHandler):
               self).__init__(application, request)
         self.manipulator = manipulator
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def check_origin(self, origin):
         return True
@@ -162,7 +166,9 @@ class ManipulatorStateHandler(JsonHandler):
         super(ManipulatorStateHandler, self).__init__(application, request)
         self.manipulator = manipulator
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def check_origin(self, origin):
         return True
@@ -192,7 +198,9 @@ class ManipulatorMoveJointHandler(ManipulatorBlockingHandler):
         super(ManipulatorMoveJointHandler, self).__init__(
             application, request, manipulator)
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def check_origin():
         return True
@@ -217,7 +225,9 @@ class ManipulatorMoveHandler(ManipulatorBlockingHandler):
         super(ManipulatorMoveHandler, self).__init__(
             application, request, manipulator)
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def run(self, id):
         try:
@@ -242,7 +252,9 @@ class ManipulatorTrajectoryHandler(ManipulatorBlockingHandler):
         super(ManipulatorTrajectoryHandler, self).__init__(
             application, request, manipulator)
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def run(self, id):
         try:
@@ -268,7 +280,9 @@ class ManipulatorMoveSafeHandler(ManipulatorBlockingHandler):
         super(ManipulatorMoveSafeHandler, self).__init__(
             application, request, manipulator)
 
-        self.set_header('Access-Control-Allow-Origin', '*')
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def run(self, identifier):
         self.manipulator.move_safe(identifier=identifier)
