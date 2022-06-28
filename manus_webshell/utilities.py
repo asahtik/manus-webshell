@@ -30,6 +30,8 @@ class RedirectHandler(tornado.web.RequestHandler):
         super(RedirectHandler, self).__init__(application, request)
         self.url = url
 
+        self.set_header('Access-Control-Allow-Origin', '*')
+
     def get(self):
         self.redirect(self.url, True)
         # self.finish()
@@ -64,6 +66,7 @@ class JsonHandler(tornado.web.RequestHandler):
         self.set_header('Content-Type', 'application/json')
         self.set_header('Cache-Control',
                         'no-store, no-cache, must-revalidate, max-age=0')
+        self.set_header('Access-Control-Allow-Origin', '*')
 
     def write_error(self, status_code, **kwargs):
         message = {}
