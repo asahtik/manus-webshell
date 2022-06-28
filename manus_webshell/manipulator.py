@@ -192,6 +192,8 @@ class ManipulatorMoveJointHandler(ManipulatorBlockingHandler):
         super(ManipulatorMoveJointHandler, self).__init__(
             application, request, manipulator)
 
+        self.set_header('Access-Control-Allow-Origin', '*')
+
     def check_origin():
         return True
 
@@ -214,6 +216,8 @@ class ManipulatorMoveHandler(ManipulatorBlockingHandler):
     def __init__(self, application, request, manipulator):
         super(ManipulatorMoveHandler, self).__init__(
             application, request, manipulator)
+
+        self.set_header('Access-Control-Allow-Origin', '*')
 
     def run(self, id):
         try:
@@ -238,6 +242,8 @@ class ManipulatorTrajectoryHandler(ManipulatorBlockingHandler):
         super(ManipulatorTrajectoryHandler, self).__init__(
             application, request, manipulator)
 
+        self.set_header('Access-Control-Allow-Origin', '*')
+
     def run(self, id):
         try:
 
@@ -261,6 +267,8 @@ class ManipulatorMoveSafeHandler(ManipulatorBlockingHandler):
     def __init__(self, application, request, manipulator):
         super(ManipulatorMoveSafeHandler, self).__init__(
             application, request, manipulator)
+
+        self.set_header('Access-Control-Allow-Origin', '*')
 
     def run(self, identifier):
         self.manipulator.move_safe(identifier=identifier)
