@@ -62,12 +62,14 @@ class ManipulatorBlockingHandler(JsonHandler):
         raise NotImplementedError()
 
     def get(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         self.clear()
         self.write_error(404, 'Bad request')
         self.finish()
         return
 
     async def post(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         try:
             blocking = self.request.arguments.get("blocking", "0")[0]
             blocking = (blocking.lower() in ("yes", "true", "1"))
@@ -119,6 +121,7 @@ class ManipulatorDescriptionHandler(JsonHandler):
         self.manipulator = manipulator
 
     def get(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         if getattr(self.manipulator, 'description', None) is None:
             self.clear()
             self.set_status(400)
@@ -153,6 +156,7 @@ class ManipulatorStateHandler(JsonHandler):
         self.manipulator = manipulator
 
     def get(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         state = self.manipulator.state
         if state is None:
             self.clear()

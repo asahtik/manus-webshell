@@ -44,6 +44,7 @@ class ApplicationHandler(JsonHandler):
         super(ApplicationHandler, self).__init__(application, request)
 
     def get(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         self.response = {
             "name" : manus.NAME,
             "version" : manus.VERSION
@@ -57,13 +58,13 @@ class CameraDescriptionHandler(JsonHandler):
         self.camera = camera
 
     def get(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         if getattr(self.camera, 'parameters', None) is None:
             self.clear()
             self.set_status(400)
             self.finish('Unavailable')
             return
         parameters = self.camera.parameters
-        self.set_header('Access-Control-Allow-Origin', '*')
         self.response = {
             "image" : {"width" : parameters.width, "height" : parameters.height},
             "intrinsics" : parameters.intrinsics,
@@ -78,10 +79,10 @@ class CameraLocationHandler(JsonHandler):
         self.camera = camera
 
     async def get(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         location = await self.camera.location()
 
         self.set_header('X-Timestamp', location.header.timestamp.isoformat())
-        self.set_header('Access-Control-Allow-Origin', '*')
         self.response = CameraLocationHandler.encode_location(location)
         self.write_json()
         self.finish()
@@ -102,15 +103,16 @@ class AppsHandler(JsonHandler):
         self._apps = apps
 
     def get(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         active = self._apps.active()
         self.response = {"list" : self._apps.list()}
-        self.set_header('Access-Control-Allow-Origin', '*')
         if not active is None:
             self.response["active"] = active.id
         self.write_json()
 
     def post(self):
-        if "run" in self.request.json:            
+        self.set_header('Access-Control-Allow-Origin', '*')
+        if "run" in self.request.json:
             self.response = {"result" : "ok"}
             self.write_json()
             self._apps.run(self.request.json["run"])
@@ -153,8 +155,8 @@ class LoginHandler(JsonHandler):
         self.write_json()
 
     def post(self):
-        self.set_secure_cookie("user", self.get_argument("username"))
         self.set_header('Access-Control-Allow-Origin', '*')
+        self.set_secure_cookie("user", self.get_argument("username"))
         self.response = {"result" : True}
         self.write_json()
 
@@ -165,12 +167,12 @@ class PrivilegedHandler(JsonHandler):
         self._privileged = privileged
 
     def get(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         operation = self.get_argument("operation")
         if operation == "shutdown":
             self._privileged.request_shutdown("")
         if operation == "restart":
             self._privileged.request_restart("")
-        self.set_header('Access-Control-Allow-Origin', '*')
         self.response = {"result" : True}
         self.write_json()
 
@@ -183,10 +185,10 @@ class StorageHandler(tornado.web.RequestHandler):
         StorageHandler.keys = set(storage.keys())
 
     def get(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         key = self.request.arguments.get("key", [""])[0].strip()
         if not key:
             self.set_header('Content-Type', 'application/json')
-            self.set_header('Access-Control-Allow-Origin', '*')
             self.finish(json.dumps(list(StorageHandler.keys)))
             return
         try:
@@ -204,6 +206,7 @@ class StorageHandler(tornado.web.RequestHandler):
         self.finish(data)
 
     def post(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         key = self.request.arguments.get("key", [""])[0].strip()
         if not key:
             self.set_status(401)
@@ -239,6 +242,7 @@ class ConfigHandler(tornado.web.RequestHandler):
         self._config = config
 
     def get(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         key = self.request.arguments.get("key", [""])[0].strip()
         if not key:
             self.set_status(404)
@@ -246,10 +250,10 @@ class ConfigHandler(tornado.web.RequestHandler):
             return
         value = self._config.get(key)
         self.set_header('Content-Type', "text/plain")
-        self.set_header('Access-Control-Allow-Origin', '*')
         self.finish(value)
 
     def post(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         key = self.request.arguments.get("key", [""])[0].strip()
         if not key:
             self.set_status(401)
