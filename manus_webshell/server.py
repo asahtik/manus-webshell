@@ -63,6 +63,7 @@ class CameraDescriptionHandler(JsonHandler):
             self.finish('Unavailable')
             return
         parameters = self.camera.parameters
+        self.set_header('Access-Control-Allow-Origin', '*')
         self.response = {
             "image" : {"width" : parameters.width, "height" : parameters.height},
             "intrinsics" : parameters.intrinsics,
@@ -103,6 +104,7 @@ class AppsHandler(JsonHandler):
     def get(self):
         active = self._apps.active()
         self.response = {"list" : self._apps.list()}
+        self.set_header('Access-Control-Allow-Origin', '*')
         if not active is None:
             self.response["active"] = active.id
         self.write_json()
@@ -146,11 +148,13 @@ class LoginHandler(JsonHandler):
         self._users = users
 
     def get(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
         self.response = {"result" : False}
         self.write_json()
 
     def post(self):
         self.set_secure_cookie("user", self.get_argument("username"))
+        self.set_header('Access-Control-Allow-Origin', '*')
         self.response = {"result" : True}
         self.write_json()
 
@@ -166,7 +170,7 @@ class PrivilegedHandler(JsonHandler):
             self._privileged.request_shutdown("")
         if operation == "restart":
             self._privileged.request_restart("")
-
+        self.set_header('Access-Control-Allow-Origin', '*')
         self.response = {"result" : True}
         self.write_json()
 
@@ -182,6 +186,7 @@ class StorageHandler(tornado.web.RequestHandler):
         key = self.request.arguments.get("key", [""])[0].strip()
         if not key:
             self.set_header('Content-Type', 'application/json')
+            self.set_header('Access-Control-Allow-Origin', '*')
             self.finish(json.dumps(list(StorageHandler.keys)))
             return
         try:
@@ -241,6 +246,7 @@ class ConfigHandler(tornado.web.RequestHandler):
             return
         value = self._config.get(key)
         self.set_header('Content-Type', "text/plain")
+        self.set_header('Access-Control-Allow-Origin', '*')
         self.finish(value)
 
     def post(self):
