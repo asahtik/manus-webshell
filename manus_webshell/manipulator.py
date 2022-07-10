@@ -19,8 +19,8 @@ TRAJECTORY_SCHEMA = {
     "items": {
         "type": "object",
         "properties": {
-            "location": {"type": "array", "items": [{"type": "number"}, {"type": "number"}, {"type": "number"}]},
-            "rotation": {"type": "array", "items": [{"type": "number"}, {"type": "number"}, {"type": "number"}]},
+            "location": {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}, {"type": "number"}]},
+            "rotation": {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}, {"type": "number"}]},
             "grip": {"type": "number"},
             "speed": {"type": "number"}
         },
